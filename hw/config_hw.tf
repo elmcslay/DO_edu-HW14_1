@@ -56,8 +56,9 @@ resource "yandex_compute_instance" "vm-1" {
           "sudo apt update && sudo apt install git -y",
           "sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
           "sudo git pull https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
-          "sudo cd boxfuse-sample-java-war-hello/",
-          "sudo mvn package"
+          "pwd"
+          //"sudo cd boxfuse-sample-java-war-hello/",
+          //"sudo mvn package"
         ]
   }
 }
