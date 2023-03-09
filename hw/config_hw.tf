@@ -53,7 +53,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   provisioner "remote-exec" {
         inline = [
-          "sudo apt update && sudo apt install git",
+          "sudo apt update && sudo apt install git -y",
           "sudo DEBIAN_FRONTEND=noninteractive apt install maven -y",
           "sudo git pull https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
           "sudo cd boxfuse-sample-java-war-hello/",
