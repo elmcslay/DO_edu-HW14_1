@@ -48,12 +48,16 @@ resource "yandex_compute_instance" "vm-1" {
     type = "ssh"
     user = "edu"
     private_key = file("~/.ssh/id_rsa")
-    host = "self.network_interface[0].nat_ip_address"
+    host = self.network_interface[0].nat_ip_address
   }
 
   provisioner "remote-exec" {
         inline = [
-          "sudo apt update && sudo apt install git maven"
+          "sudo apt update && sudo apt install git",
+          "sudo DEBIAN_FRONTEND=noninteractive apt install maven -y",
+          "sudo git pull https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
+          "sudo cd boxfuse-sample-java-war-hello/",
+          "sudo mvn package",
         ]
   }
 }
