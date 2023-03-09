@@ -45,6 +45,12 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
 
+  connection {
+    type = "ssh"
+    user = "edu"
+    private_key = file("~/.ssh/id_rsa")
+  }
+
   provisioner "remote-exec" {
         inline = [
           "sudo apt update && sudo apt install git maven"
