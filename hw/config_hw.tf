@@ -44,12 +44,11 @@ resource "yandex_compute_instance" "vm-1" {
     preemptible = true
   }
 
-
   connection {
     type = "ssh"
     user = "edu"
     private_key = file("~/.ssh/id_rsa")
-    host = "build"
+    host = "self.network_interface[0].nat_ip_address"
   }
 
   provisioner "remote-exec" {
