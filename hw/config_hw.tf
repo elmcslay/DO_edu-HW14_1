@@ -43,6 +43,13 @@ resource "yandex_compute_instance" "vm-1" {
   scheduling_policy {
     preemptible = true
   }
+
+
+  provisioner "remote-exec" {
+        inline = [
+          "sudo apt update && sudo apt install git maven"
+        ]
+    }
 }
 
 resource "yandex_compute_instance" "vm-2" {
@@ -74,20 +81,6 @@ resource "yandex_compute_instance" "vm-2" {
   scheduling_policy {
     preemptible = true
   }
-}
-
-resource "yandex_compute_instance" "vm-1" {
-    /*connection {
-      type = "ssh"
-      user = "edu"
-      private_key = "${file(~/.ssh/id_rsa)}"
-    }
-    */
-    provisioner "remote-exec" {
-        inline = [
-          "sudo apt update && sudo apt install git maven"
-        ]
-    }
 }
 
 
