@@ -44,7 +44,9 @@ resource "yandex_compute_instance" "vm-1" {
     preemptible = true
   }
 
-  connection {
+  
+
+  /*connection {
     type = "ssh"
     user = "edu"
     private_key = file("~/.ssh/id_rsa")
@@ -59,7 +61,7 @@ resource "yandex_compute_instance" "vm-1" {
           "sudo cd boxfuse-sample-java-war-hello/",
           "sudo mvn package"
         ]
-  }
+  }*/
 }
 
 resource "yandex_compute_instance" "vm-2" {
@@ -92,7 +94,7 @@ resource "yandex_compute_instance" "vm-2" {
     preemptible = true
   }
 
-  connection {
+  /*connection {
     type = "ssh"
     user = "edu"
     private_key = file("~/.ssh/id_rsa")
@@ -103,7 +105,7 @@ resource "yandex_compute_instance" "vm-2" {
         inline = [
           "sudo apt update && sudo apt install tomcat9 -y"
         ]
-  }
+  }*/
 }
 
 
