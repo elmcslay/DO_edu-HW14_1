@@ -25,7 +25,7 @@ resource "yandex_compute_instance" "vm-1" {
   boot_disk {
     initialize_params {
         image_id = "fd8snjpoq85qqv0mk9gi"
-        type = ssd
+        type = "network-ssd"
         size = 15
     }
   }
@@ -36,7 +36,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    user_data = "${file("~/terraform1/meta.txt")}"
+    user_data = "${file("~/terr1/meta.txt")}"
   }
 
   scheduling_policy {
