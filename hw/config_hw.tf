@@ -85,7 +85,7 @@ resource "yandex_compute_instance" "vm-1" {
     */
     provisioner "remote-exec" {
         inline = [
-          "sudo apt update && sudo apt install git mvn "
+          "sudo apt update && sudo apt install git maven"
         ]
     }
 }
