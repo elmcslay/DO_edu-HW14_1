@@ -91,6 +91,19 @@ resource "yandex_compute_instance" "vm-2" {
   scheduling_policy {
     preemptible = true
   }
+
+  connection {
+    type = "ssh"
+    user = "edu"
+    private_key = file("~/.ssh/id_rsa")
+    host = self.network_interface[0].nat_ip_address
+  }
+
+  provisioner "remote-exec" {
+        inline = [
+          "sudo apt update && sudo apt install tomcat9 -y"
+        ]
+  }
 }
 
 
