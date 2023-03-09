@@ -16,6 +16,7 @@ provider "yandex" {
 
 resource "yandex_compute_instance" "vm-1" {
   name = "test-vm-1"
+  platform_id = "standard-v3"
 
   resources {
     cores = 2
