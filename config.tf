@@ -37,7 +37,8 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    user_data = "${file("~/terr1/meta.txt")}"
+    //user_data = "${file("~/terr1/meta.txt")}"
+    ssh-keys = "edu:${file("~/.ssh/id_rsa.pub")}"
   }
 
   scheduling_policy {
