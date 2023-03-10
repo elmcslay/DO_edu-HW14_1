@@ -38,6 +38,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   metadata = {
     user-data = "${file("./meta.yml")}"
+    ssh-key = "edu:${file("~/.ssh/id_rsa")}"
   }
 
   scheduling_policy {
@@ -64,7 +65,7 @@ resource "yandex_compute_instance" "vm-1" {
   }*/
 }
 
-resource "yandex_compute_instance" "vm-2" {
+/*resource "yandex_compute_instance" "vm-2" {
   name = "prod"
   platform_id = "standard-v3"
 
@@ -105,7 +106,7 @@ resource "yandex_compute_instance" "vm-2" {
         inline = [
           "sudo apt update && sudo apt install tomcat9 -y"
         ]
-  }*/
+  }
 }
 
-
+*/
