@@ -8,14 +8,15 @@ terraform {
 }
 
 provider "yandex" {
-  token = ""  
+  //token = YC_TOKEN
   zone = "ru-central1-b"
   cloud_id = "b1g8au9em58afkdtkahm"
   folder_id = "b1go28jbjr6v23i268qj"
 }
 
 resource "yandex_compute_instance" "vm-1" {
-  name = "build"
+  name = "demo-build"
+  hostname = "demo-build"
   platform_id = "standard-v3"
 
   resources {
@@ -27,7 +28,7 @@ resource "yandex_compute_instance" "vm-1" {
     initialize_params {
         image_id = "fd8snjpoq85qqv0mk9gi"
         type = "network-ssd"
-        size = 15
+        size = 10
     }
   }
 
@@ -66,7 +67,8 @@ resource "yandex_compute_instance" "vm-1" {
 }
 
 /*resource "yandex_compute_instance" "vm-2" {
-  name = "prod"
+  name = "demo-prod"
+  hostname = "demo-prod"
   platform_id = "standard-v3"
 
   resources {
@@ -78,7 +80,7 @@ resource "yandex_compute_instance" "vm-1" {
     initialize_params {
         image_id = "fd8snjpoq85qqv0mk9gi"
         type = "network-ssd"
-        size = 15
+        size = 10
     }
   }
 
@@ -89,6 +91,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   metadata = {
     user-data = "${file("./meta.yml")}"
+    ssh-key = "edu:${file("~/.ssh/id_rsa_2")}"
   }
 
   scheduling_policy {
