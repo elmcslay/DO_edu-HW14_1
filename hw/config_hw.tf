@@ -70,7 +70,8 @@ resource "yandex_compute_instance" "vm-1" {
           "sudo apt update && sudo apt install git unzip -y",
           "curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip",
           "unzip awscliv2.zip",
-          "sudo ./aws/install"
+          "sudo ./aws/install",
+          "aws configure"
 
           
           //"sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
