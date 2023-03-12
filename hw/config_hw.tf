@@ -58,7 +58,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   provisioner "local-exec" {
-    command = "rsync -a edu@self.network_interface[0].nat_ip_address:/etc/hostname ~/rem_hostname"     
+    command = "rsync -a edu@${self.network_interface[0].nat_ip_address}:/etc/hostname ~/rem_hostname"     
   }
 }
 /*
