@@ -4,3 +4,5 @@ users:
     groups: sudo
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDV0BYKzsLY5mAQqkU9Z0ShdZksAYkpQVq32FdLnZDsc9YpHTjgTFevX6b3XofiXp0BN7YDhjvg2O1qG8i5OxJCtHd7l57ssL1ro3oZu3YHFZxJzFgldToArMTPr/kImZLbED6RpRAN6GVDdASGfrnbo6xrKw3Mv8hMbYnx1/lTR94pWfELQCTwM4Q2H2fGo5OArJL0Yi8XiLdcnFBGCEe7nIE4XO3litSGfNsA1I9sUKnP5zhKpcBcEis76phbz256LOtzqfyzRCk3jgO34f/n5nEuFQ/ulU0RoZ3dD44bqfa/gHr+sMZm7CEBepdf0n8VjQCU6c0qBekqUihusdvVyxSkQajm8Osc/O94kQSqQE2Wt9r2BYlEOBYbeD15tfKZZMw5kFnSb02wgZ2YM1EM7ryAIu0sSd9dmCkzAZsO5hayXx2/DBXMlUpXHl3ohFdHLukM6xQzJOuarxhFK4DEbk6ca+cGqulwEg6rzgpgiejc7d6QoVhbL76ReyUvHOU= root@demo-master
