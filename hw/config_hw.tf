@@ -33,6 +33,9 @@ resource "yandex_compute_instance" "vm-1" {
   name = "demo-build"
   hostname = "demo-build"
   platform_id = "standard-v3"
+  depends_on = [
+    yandex_storage_bucket.bckt-1
+  ]
 
  resources {
     cores = 2
@@ -84,6 +87,9 @@ resource "yandex_compute_instance" "vm-2" {
   name = "demo-prod"
   hostname = "demo-prod"
   platform_id = "standard-v3"
+  depends_on = [
+    yandex_compute_instance.vm-1
+  ]
 
   resources {
     cores = 2
