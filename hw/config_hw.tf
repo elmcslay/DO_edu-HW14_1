@@ -127,7 +127,7 @@ resource "yandex_compute_instance" "vm-2" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt update && sudo apt install tomcat9 -y",
+      "sudo apt update && sudo apt install s3cmd tomcat9 -y",
       "sudo s3cmd --access_key=${yandex_storage_bucket.bckt-1.access_key} --secret_key=${yandex_storage_bucket.bckt-1.secret_key} --bucket-location=ru-central1 --host=storage.yandexcloud.net --host-bucket='%(bucket)s.storage.yandexcloud.net' get s3://${yandex_storage_bucket.bckt-1.bucket}/hello-1.0.war /var/lib/tomcat9/webapps/"
     ]
   }
