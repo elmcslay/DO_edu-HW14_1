@@ -41,9 +41,9 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-        image_id = "fd8snjpoq85qqv0mk9gi"
-        type = "network-ssd"
-        size = 10
+      image_id = "fd8snjpoq85qqv0mk9gi"
+      type = "network-ssd"
+      size = 10
     }
   }
 
@@ -69,18 +69,18 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   provisioner "remote-exec" {
-        inline = [
-          "sudo apt update && sudo apt install git s3cmd -y",
-          "sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
-          "sudo git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
-          "cd boxfuse-sample-java-war-hello/",
-          "sudo mvn package",
-          "s3cmd --access_key=${yandex_storage_bucket.bckt-1.access_key} --secret_key=${yandex_storage_bucket.bckt-1.secret_key} --bucket-location=ru-central1 --host=storage.yandexcloud.net --host-bucket='%(bucket)s.storage.yandexcloud.net' put target/hello-1.0.war s3://${yandex_storage_bucket.bckt-1.bucket}"
-        ]
+    inline = [
+      "sudo apt update && sudo apt install git s3cmd -y",
+      "sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
+      "sudo git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
+      "cd boxfuse-sample-java-war-hello/",
+      "sudo mvn package",
+      "s3cmd --access_key=${yandex_storage_bucket.bckt-1.access_key} --secret_key=${yandex_storage_bucket.bckt-1.secret_key} --bucket-location=ru-central1 --host=storage.yandexcloud.net --host-bucket='%(bucket)s.storage.yandexcloud.net' put target/hello-1.0.war s3://${yandex_storage_bucket.bckt-1.bucket}"
+    ]
   }
 }
 
-/*resource "yandex_compute_instance" "vm-2" {
+resource "yandex_compute_instance" "vm-2" {
   name = "demo-prod"
   hostname = "demo-prod"
   platform_id = "standard-v3"
@@ -92,9 +92,9 @@ resource "yandex_compute_instance" "vm-1" {
 
   boot_disk {
     initialize_params {
-        image_id = "fd8snjpoq85qqv0mk9gi"
-        type = "network-ssd"
-        size = 10
+      image_id = "fd8snjpoq85qqv0mk9gi"
+      type = "network-ssd"
+      size = 10
     }
   }
 
@@ -105,14 +105,14 @@ resource "yandex_compute_instance" "vm-1" {
 
   metadata = {
     user-data = "${file("./meta.yml")}"
-    ssh-key = "edu:${file("~/.ssh/id_rsa_2")}"
   }
 
   scheduling_policy {
     preemptible = true
   }
 
-  /*connection {
+
+  connection {
     type = "ssh"
     user = "edu"
     private_key = file("~/.ssh/id_rsa")
@@ -120,10 +120,11 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   provisioner "remote-exec" {
-        inline = [
-          "sudo apt update && sudo apt install tomcat9 -y"
-        ]
+    inline = [
+      "sudo apt update && sudo apt install tomcat9 -y",
+      "s3cmd --access_key=${yandex_storage_bucket.bckt-1.access_key} --secret_key=${yandex_storage_bucket.bckt-1.secret_key} --bucket-location=ru-central1 --host=storage.yandexcloud.net --host-bucket='%(bucket)s.storage.yandexcloud.net' get s3://${yandex_storage_bucket.bckt-1.bucket}/hello-1.0.war /var/lib/tomcat9/webapps"
+    ]
   }
 }
 
-*/
+
