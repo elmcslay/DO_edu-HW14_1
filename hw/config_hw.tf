@@ -25,6 +25,7 @@ resource "yandex_storage_bucket" "bckt-1" {
   secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
   bucket = "demo-bucket.doedu.yandex.ru" 
   max_size = 1073741824
+  force_destroy = true
 }
 
 
