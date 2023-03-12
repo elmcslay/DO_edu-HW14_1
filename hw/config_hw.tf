@@ -8,8 +8,8 @@ terraform {
 }
 
 provider "yandex" {
-  token = "$YC_TOKEN"
-  //service_account_key_file = "${file("~/authorized_key.json")}"
+  //token = "$YC_TOKEN"
+  service_account_key_file = "${file("~/key.json")}"
   zone = "ru-central1-b"
   cloud_id = "b1g8au9em58afkdtkahm"
   folder_id = "b1go28jbjr6v23i268qj"
