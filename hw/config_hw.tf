@@ -15,7 +15,7 @@ provider "yandex" {
 }
 
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
-  service_account_id = service1.id
+  service_account_id = "aje2il7vqsine6kr7di0"
   description = "static access key for object storage"
 }
 
