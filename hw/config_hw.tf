@@ -39,7 +39,6 @@ resource "yandex_compute_instance" "vm-1" {
 
   metadata = {
     user-data = "${file("./meta.yml")}"
-    //ssh-keys = "edu:${file("~/.ssh/id_rsa.pub")}"
   }
 
   scheduling_policy {
@@ -48,7 +47,7 @@ resource "yandex_compute_instance" "vm-1" {
 
   
 
-  /*connection {
+  connection {
     type = "ssh"
     user = "edu"
     private_key = file("~/.ssh/id_rsa")
@@ -63,7 +62,7 @@ resource "yandex_compute_instance" "vm-1" {
           "sudo cd boxfuse-sample-java-war-hello/",
           "sudo mvn package"
         ]
-  }*/
+  }
 }
 
 /*resource "yandex_compute_instance" "vm-2" {
