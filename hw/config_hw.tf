@@ -26,7 +26,7 @@ resource "yandex_storage_bucket" "bckt-1" {
   max_size = 1073741824
 }
 
-/*resource "yandex_compute_instance" "vm-1" {
+resource "yandex_compute_instance" "vm-1" {
   name = "demo-build"
   hostname = "demo-build"
   platform_id = "standard-v3"
@@ -67,11 +67,16 @@ resource "yandex_storage_bucket" "bckt-1" {
 
   provisioner "remote-exec" {
         inline = [
-          "sudo apt update && sudo apt install git -y",
-          "sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
-          "sudo git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
-          "cd boxfuse-sample-java-war-hello/",
-          "sudo mvn package"
+          "sudo apt update && sudo apt install git unzip -y",
+          "curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip",
+          "unzip awscliv2.zip",
+          "sudo ./aws/install"
+
+          
+          //"sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
+          //"sudo git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
+          //"cd boxfuse-sample-java-war-hello/",
+          //"sudo mvn package"
         ]
   }
 }
