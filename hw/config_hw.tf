@@ -8,7 +8,6 @@ terraform {
 }
 
 provider "yandex" {
-  //token = "$YC_TOKEN"
   service_account_key_file = "${file("~/key.json")}"
   zone = "ru-central1-b"
   cloud_id = "b1g8au9em58afkdtkahm"
@@ -39,8 +38,8 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
   metadata = {
-    //user-data = "${file("./meta.yml")}"
-    ssh-key = "ubuntu:${file("~/.ssh/id_rsa")}"
+    user-data = "${file("./meta.yml")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa")}"
   }
 
   scheduling_policy {
