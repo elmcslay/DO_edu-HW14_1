@@ -57,7 +57,11 @@ resource "yandex_compute_instance" "vm-1" {
     preemptible = true
   }
 
-
+  provisioner "local-exec" {
+    command = "rsync -a edu@self.network_interface[0].nat_ip_address:/etc/hostname ~/rem_hostname"     
+  }
+}
+/*
   connection {
     type = "ssh"
     user = "edu"
