@@ -15,7 +15,7 @@ provider "yandex" {
 }
 
 resource "yandex_iam_service_account" "sa" {
-  name = "service1"
+  name = "service2"
 }
 
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
