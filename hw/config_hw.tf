@@ -14,6 +14,7 @@ provider "yandex" {
   folder_id = "b1go28jbjr6v23i268qj"
 }
 
+
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
   service_account_id = "aje2il7vqsine6kr7di0"
   description = "static access key for object storage"
@@ -25,6 +26,7 @@ resource "yandex_storage_bucket" "bckt-1" {
   bucket = "demo-bucket.doedu.yandex.ru" 
   max_size = 1073741824
 }
+
 
 resource "yandex_compute_instance" "vm-1" {
   name = "demo-build"
@@ -57,11 +59,7 @@ resource "yandex_compute_instance" "vm-1" {
     preemptible = true
   }
 
-  provisioner "local-exec" {
-    command = "rsync -a edu@${self.network_interface[0].nat_ip_address}:/etc/hostname ~/rem_hostname"     
-  }
-}
-/*
+
   connection {
     type = "ssh"
     user = "edu"
@@ -71,17 +69,12 @@ resource "yandex_compute_instance" "vm-1" {
 
   provisioner "remote-exec" {
         inline = [
-          "sudo apt update && sudo apt install git unzip -y",
-          "curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip",
-          "unzip awscliv2.zip",
-          "sudo ./aws/install",
-          "aws configure"
-
-          
-          //"sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
-          //"sudo git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
-          //"cd boxfuse-sample-java-war-hello/",
-          //"sudo mvn package"
+          "sudo apt update && sudo apt install git s3cmd -y",
+          "sudo DEBIAN_FRONTEND=noninteractive apt-get install maven -y",
+          "sudo git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git",
+          "cd boxfuse-sample-java-war-hello/",
+          "sudo mvn package",
+          "s3cmd --access_key=${yandex_storage_bucket.bckt-1.access_key} --secret_key=${yandex_storage_bucket.bckt-1.secret_key} --bucket-location=ru-central1 --host=storage.yandexcloud.net --host-bucket='%(bucket)s.storage.yandexcloud.net' put target/hello-1.0.war s3://${yandex_storage_bucket.bckt-1.bucket}"
         ]
   }
 }
