@@ -14,12 +14,8 @@ provider "yandex" {
   folder_id = "b1go28jbjr6v23i268qj"
 }
 
-resource "yandex_iam_service_account" "sa" {
-  name = "service2"
-}
-
 resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
-  service_account_id = yandex_iam_service_account.sa.id
+  service_account_id = service1.sa.id
   description = "static access key for object storage"
 }
 
